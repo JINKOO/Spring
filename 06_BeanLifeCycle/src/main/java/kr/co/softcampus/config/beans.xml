@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd"
+	                    
+	                    
+	default-init-method="default_init" default-destroy-method="default_destroy">
+	<!-- bean에 init-method, destroy-method를 지정하지 않았다면, 위의 default_init, default_destroy가 호출된다.-->
+	                    
+	                    
+	<!--객체가 생성 될때, 생성자 호출 후 init-method로 설정한 메소드가 호출되고, 
+	    IoC 컨테이너의 close() 호출되면, 객체가 소멸되고 destroy-method로 설정한 메소드가 호출된다.-->
+	<bean id="t1" class="kr.co.softcampus.beans.TestBean1" lazy-init="true" init-method="bean1_init" destroy-method="bean1_destroy"/>
+	
+	
+	<!--init_method, destroy-method를 설장하지 않으면, default-init-method, default-destroy-method가 호출된다. -->
+	<bean id="t2" class="kr.co.softcampus.beans.TestBean2" lazy-init="true"/>
+	
+	
+	<!-- init_method, destroy-method지정되어있고, default-init-method, default-destroy-method를 모두 등록되어 경우,
+	      init-method, destroy-method가 호출된다. 즉, 지정한 메소드들이 호출된다.-->
+	<bean id="t3" class="kr.co.softcampus.beans.TestBean3" lazy-init="true" init-method="bean3_init" destroy-method="bean3_destroy"/>
+	
+	<!-- default-init_method, default-destroy-method: 해당 class에 지정하지 않았다면 무시된다.(즉 오류가 아니다).
+	     init-method, default-method: 해당 class에 정의 되어있지 않다면 오류가 난다.
+	 -->
+	 <!-- 얘는 오류 아님 -->
+	 <bean id="t4" class="kr.co.softcampus.beans.TestBean4" lazy-init="true"/>
+	 
+	 <!-- 얘는 오류임 -->
+	 <bean id="t4_2" class="kr.co.softcampus.beans.TestBean4" lazy-init="true" init-method="bean4_init" destroy-method="bean4_destroy"/>
+	 
+</beans>
