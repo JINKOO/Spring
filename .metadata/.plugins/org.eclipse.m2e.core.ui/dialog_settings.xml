@@ -2,6 +2,10 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Users\KoJinKweon\Desktop\Code\SpringFramework_Review\10_CollectionDI\src\main\java\kr\co\softcampus\main\Main.java"/>
+			<item value="C:\Users\KoJinKweon\Desktop\Code\SpringFramework_Review\08_ConstructorDI\src\main\java\kr\co\softcampus\main\Main.java"/>
+			<item value="C:\Users\KoJinKweon\Desktop\Code\SpringFramework_Review\06_BeanLifeCycle"/>
+			<item value="C:\Users\KoJinKweon\Desktop\Code\SpringFramework_Review\05_BeanCreate\src\main\java\kr\co\softcampus\main\Main.java"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -48,6 +52,12 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="11_AutoWire"/>
+			<item value="10_CollectionDI"/>
+			<item value="09_SetterDI"/>
+			<item value="08_ConstructorDI"/>
+			<item value="07_BeanPostProcessor"/>
+			<item value="06_BeanLifeCycle"/>
 			<item value="05_BeanCreate"/>
 			<item value="04_IoC"/>
 			<item value="03_SpringBasic"/>

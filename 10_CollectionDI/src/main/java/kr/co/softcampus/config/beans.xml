@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd">
+	                    
+	                    
+	<bean id="t1" class="kr.co.softcampus.beans.TestBean">
+	    <!-- 제너릭이 String인 List -->
+	    <!-- setList1()로 주입 된다. -->
+		<property name="list1">
+			<list>
+				<value>"고진권"</value>
+				<value>"박성준"</value>
+				<value>"김준원"</value>
+			</list>
+		</property>
+		
+		<!-- 제너릭이 Integer인 List-->
+		<property name="list2">
+			<list>
+				<value>100</value>
+				<value>200</value>
+				<value>300</value>
+			</list>
+		</property>
+		
+		<!-- 제너릭이 DataBean인 List -->
+		<property name="list3">
+			<list>
+				<bean class="kr.co.softcampus.beans.DataBean"/>
+				<bean class="kr.co.softcampus.beans.DataBean"/>
+				<!-- 이미 정의 되어있는 Bean 객체 주입 -->
+				<ref bean="data_bean1"/>
+				<ref bean="data_bean1"/>
+			</list>
+		</property>
+		
+		
+		<!-- 제너릭이 String인 Set -->
+		<property name="set1">
+			<set>
+				<value>고진권</value>
+				<value>김준원</value>
+				<value>김선민</value>
+				<value>김선민</value>  <!-- set이므로 중복 되지 않아 동일한 값은 주입되지 않는다. -->
+				<value>김선민</value>
+			</set>
+		</property>
+		
+		<!-- 제너릭이 Integer인 Set -->
+		<property name="set2">
+			<set>
+				<value type="int">100</value>
+				<value type="int">200</value>
+				<value type="int">300</value>
+			</set>
+		</property>
+		
+		<!-- 제너릭이 DataBean인 Set -->
+		<property name="set3">
+			<set>
+				<bean class="kr.co.softcampus.beans.DataBean"/>
+				<bean class="kr.co.softcampus.beans.DataBean"/>
+				<!-- set에서는 id가 동일하면, 주입 할 수 없다. -->
+				<!-- Spring에서는 Singleton이던 prototype이든가에 상관없이 id가 동일한 2개이상의 Bean을 주입할 수 없다. -->
+				<ref bean="data_bean1"/>
+				<ref bean="data_bean1"/>
+			</set>
+		</property>
+		
+		<!-- 제너릭이 <String, Object>인 Map -->
+		<property name="map1">
+			<map>
+				<entry key="a1" value="문자열"/>
+				<entry key="a2" value="100" value-type="int"/>
+				<entry key="a3"> <!-- value는 객체 -->
+					<bean class="kr.co.softcampus.beans.DataBean"/>
+				</entry>
+				<entry key="a4"> <!-- value는 객체 -->
+					<ref bean="data_bean1"/>
+				</entry>
+				<entry key="a5"> <!-- value는 Collection 객체 -->
+					<list>
+						<value>고진권</value>
+						<value>김준원</value>
+						<value>박성준</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+		
+		<!-- Properties -->
+		<property name="prop1">
+			<props>
+				<prop key="p1">문자열1</prop>
+				<prop key="p2">문자열2</prop>
+				<prop key="p3">문자열3</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<!-- 이미 정의된 Bean 주입될 때마다 새로운 객체가 되도록 한다. -->
+	<bean id="data_bean1" class="kr.co.softcampus.beans.DataBean" scope="prototype"/>
+	
+	
+</beans>

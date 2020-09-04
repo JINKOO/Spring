@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd"
+	                    
+	                    
+	default-autowire="byName">
+	                    
+	<!-- setter()를 통한 이미 정의된 Bean 주입 -->
+	<bean id="obj1" class="kr.co.softcampus.beans.TestBean1">
+		<property name="data1" ref="data_bean1"></property>
+		<property name="data2" ref="data_bean1"></property>
+	</bean>
+	
+	<bean id="data_bean1" class="kr.co.softcampus.beans.DataBean1" scope="prototype"/>
+	
+	<!-- autowire=byName를 사용한 자동 주입 -->
+	<bean id="obj2" class="kr.co.softcampus.beans.TestBean1" autowire="byName"/>
+	<!-- Bean객체의 property이름과 정의된 Bean의 이름이 같은 것을 찾아 자동으로 주입한다-->
+	<bean id="data1" class="kr.co.softcampus.beans.DataBean1"/>
+	<bean id="data2" class="kr.co.softcampus.beans.DataBean1"/>
+	
+	
+	<!-- autowire-byType를 사용한 자동 주입 -->
+	<bean id="obj3" class="kr.co.softcampus.beans.TestBean2" autowire="byType"/>
+	<!-- 동일 타입의 Bean이 2개이상 정의되어 있다면 오류가 발생한다. -->
+	<!-- <bean class="kr.co.softcampus.beans.DataBean2"/> -->
+	
+	<bean id="data_bean2" class="kr.co.softcampus.beans.DataBean2" scope="prototype"/>
+	
+	
+	<!-- 참조 변수형의 생성자를 통한 주입 -->
+	<bean id="obj4" class="kr.co.softcampus.beans.TestBean3" lazy-init="true">
+		<constructor-arg ref="data_bean2" index="0"/>
+		<constructor-arg ref="data_bean2" index="1"/>
+	</bean>
+	
+	<!-- 참조 변수형의 생성자를 통한 자동 주입 -->
+	<!-- data_bean2가 위에 정의되어 있다. -->
+	<bean id="obj5" class="kr.co.softcampus.beans.TestBean3" lazy-init="true" autowire="constructor"/>
+	
+	<!-- 생성자를 사용하여 일일이 주입 -->
+	<bean id="obj6" class="kr.co.softcampus.beans.TestBean3" lazy-init="true">
+		<constructor-arg value="100" type="int" index="0"/>
+		<constructor-arg value="김준원" type="java.lang.String" index="1"/>
+		<constructor-arg ref="data_bean2" index="2"/>
+		<constructor-arg ref="data_bean2" index="3"/>
+	</bean>
+	
+	
+	<!-- 기본자료형은 직접 주입 하고, 참조변수형은 생성자를 통한 자동 주입 사용 -->	
+	<bean id="obj7" class="kr.co.softcampus.beans.TestBean3" lazy-init="true" autowire="constructor">
+		<constructor-arg value="100" type="int" index="0"/>
+		<constructor-arg value="고진권" type="java.lang.String" index="1"/>
+	</bean>
+	
+	
+	<!-- 자동 주입이 설정 되어있지 않은 경우 위의 default-autowire를 따른다. 설정 되어있다면 자신거 따라간다. -->
+	<!-- 위에서 id=obj2일 때 bean 정의한 것에 따라 자도 주입된다. -->
+	<bean id="obj8" class="kr.co.softcampus.beans.TestBean1"/>
+	
+	
+	<!-- default_autowire를 수행하기 싫을 때 -->
+	<bean id="obj9" class="kr.co.softcampus.beans.TestBean1" autowire="no"/>
+	
+</beans>

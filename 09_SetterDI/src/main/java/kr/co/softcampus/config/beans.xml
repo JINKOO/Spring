@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd">
+	                    
+	<!-- setter()를 통한 주입 name-->        
+	<bean id="t1" class="kr.co.softcampus.beans.TestBean">
+		<property name="data1" value="100" />
+		<property name="data2" value="11.11"/>
+		<property name="data3" value="true"/>
+		<property name="data4" value="안녕하세요"/>
+		<property name="data5">
+		<!-- bean 새로 지정하고 주입 -->
+			<bean class="kr.co.softcampus.beans.DataBean"/>
+		</property>
+		<!-- 이미 정의된 bean을 주입할 때에는 ref속성을 사용한다. data_bean의 주솟값을 data6에 주입한다. -->
+		<property name="data6" ref="data_bean"/>
+	</bean>
+	
+	<!-- bean이 어디에 정의된 위치는 상관 없다. -->
+	<bean id="data_bean" class="kr.co.softcampus.beans.DataBean"/>
+</beans>
